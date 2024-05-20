@@ -264,6 +264,15 @@ abstract class Calculator {
       min(rect.bottom, imageRect.bottom),
     );
   }
+
+
+  /// check if rect inisde box
+  bool isValidRect(ViewportBasedRect rect, Rect box) {
+    return rect.left >= box.left &&
+        rect.right <= box.right &&
+        rect.top >= box.top &&
+        rect.bottom <= box.bottom;
+  }
 }
 
 class HorizontalCalculator extends Calculator {
