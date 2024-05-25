@@ -490,6 +490,11 @@ class _CropEditorState extends State<_CropEditor> {
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
+    final left = (_cropRect.left - _imageRect.left) * screenSizeRatio / _scale;
+    final top = (_cropRect.top - _imageRect.top) * screenSizeRatio / _scale;
+    final width = _cropRect.width * screenSizeRatio / _scale;
+    final height = _cropRect.height * screenSizeRatio / _scale;
+
     // use compute() not to block UI update
     final cropResult = await compute(
       _cropFunc,
@@ -497,10 +502,10 @@ class _CropEditorState extends State<_CropEditor> {
         widget.imageCropper,
         _parsedImageDetail!.image,
         Rect.fromLTWH(
-          (_cropRect.left - _imageRect.left) * screenSizeRatio / _scale,
-          (_cropRect.top - _imageRect.top) * screenSizeRatio / _scale,
-          _cropRect.width * screenSizeRatio / _scale,
-          _cropRect.height * screenSizeRatio / _scale,
+          left.roundToPlaces(5),
+          top.roundToPlaces(5),
+          width.roundToPlaces(5),
+          height.roundToPlaces(5),
         ),
         withCircleShape,
         _detectedFormat,
@@ -816,4 +821,10 @@ FutureOr<Uint8List> _cropFunc(List<dynamic> args) {
     bottomRight: Offset(rect.right, rect.bottom),
     shape: withCircleShape ? ImageShape.circle : ImageShape.rectangle,
   );
+}
+
+extension on double {
+  double roundToPlaces(int places) {
+    return (this * pow(10, places)).round() / pow(10, places);
+  }
 }

@@ -24,10 +24,10 @@ class ImageImageCropper extends ImageCropper<Image> {
     ImageFormat outputFormat = ImageFormat.jpeg,
     ImageShape shape = ImageShape.rectangle,
   }) {
-    if (topLeft.dx.isNegative ||
-        topLeft.dy.isNegative ||
-        bottomRight.dx.isNegative ||
-        bottomRight.dy.isNegative ||
+    if (topLeft.dx < 0 ||
+        topLeft.dy < 0 ||
+        bottomRight.dx < 0 ||
+        bottomRight.dy < 0 ||
         topLeft.dx.toInt() > original.width ||
         topLeft.dy.toInt() > original.height ||
         bottomRight.dx.toInt() > original.width ||
