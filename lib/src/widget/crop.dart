@@ -25,7 +25,7 @@ typedef CroppingRectBuilder = ViewportBasedRect Function(
 
 typedef OnMovedCallback = void Function(
   ViewportBasedRect viewportRect,
-  ImageBasedRectimageRect,
+    ImageBasedRect,
     );
 
 enum CropStatus { nothing, loading, ready, cropping }
