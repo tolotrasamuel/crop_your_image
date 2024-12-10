@@ -75,3 +75,6 @@ build/
 
 # FVM Version Cache
 .fvm/.idea/workspace.xml
+
+.fvm/
+
